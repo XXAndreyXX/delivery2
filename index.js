@@ -29,10 +29,10 @@ app.get('/shop/:shopId/products', ProductController.getAllByShopId);
 //     })
 // });
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
     if (err) {
         return console.log(err);
-    } else {
-        return console.log('Server OK');
     }
-})
+
+    console.log('Server OK');
+});
