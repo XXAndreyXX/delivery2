@@ -12,9 +12,9 @@ app.use(express.json());
 
 
 
-app.get('/shops', ShopController.getAll);
-app.get('/products', ProductController.getAll);
-app.get('/shop/:shopId/products', ProductController.getAllByShopId);
+app.get('./api/shops', ShopController.getAll);
+app.get('./api/products', ProductController.getAll);
+app.get('./api/shop/:shopId/products', ProductController.getAllByShopId);
 
 ////app.get('/shops/:id', ShopController.getOne);
 
