@@ -1,33 +1,23 @@
 
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import { ShopController, ProductController } from './controllers/index.js';
 
 mongoose.connect('mongodb+srv://admin:Znz99pTUygHXcpJ@cluster0.gbesg.mongodb.net/delivery?retryWrites=true&w=majority')
     .then(() => console.log('DB ok'))
     .catch(err => console.log('DB error', err));
-// .catch(() => console.log('DB error', err));
+
 const app = express();
 app.use(express.json());
+app.options('*', cors()) // include before other routes
 
 
-
-app.get('/api/shops', ShopController.getAll);
-app.get('/api/products', ProductController.getAll);
-app.get('/api/shop/:shopId/products', ProductController.getAllByShopId);
+app.get('/api/shops', cors(), ShopController.getAll);
+app.get('/api/products', cors(), ProductController.getAll);
+app.get('/api/shop/:shopId/products', cors(), ProductController.getAllByShopId);
 
 ////app.get('/shops/:id', ShopController.getOne);
-
-
-// app.get('/', (req, res) => {
-//     res.send('Hello World!!!');
-// });
-// app.post('/auth/login', (req, res) => {
-//     console.log(req.body);
-//     res.json({
-//         success: true,
-//     })
-// });
 
 app.listen(process.env.PORT || 4444, (err) => {
     if (err) {
